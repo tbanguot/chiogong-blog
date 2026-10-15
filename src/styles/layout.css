@@ -1,0 +1,132 @@
+/* ───────── Site layout: navbar, footer, heroes ───────── */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4.25rem;
+}
+
+.navbar__brand,
+.footer__brand {
+  font: 700 1.4rem var(--font-serif);
+  text-decoration: none;
+}
+
+.navbar__toggle {
+  display: grid;
+  place-items: center;
+  width: var(--control-h);
+  height: var(--control-h);
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-sm);
+  background: none;
+}
+
+/* Mobile: links drop down under the bar */
+.navbar__links {
+  position: absolute;
+  top: 100%;
+  inset-inline: 0;
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.navbar__links[data-open='false'] {
+  display: none;
+}
+
+.navbar__link {
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navbar__link:hover {
+  background: var(--tint);
+}
+
+.navbar__link[aria-current='page'] {
+  color: var(--accent-text);
+  box-shadow: inset 0 -3px var(--accent);
+}
+
+@media (min-width: 860px) {
+  .navbar__toggle {
+    display: none;
+  }
+
+  .navbar__links,
+  .navbar__links[data-open] {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+}
+
+/* Heroes */
+.hero,
+.page-hero {
+  background:
+    radial-gradient(60% 90% at 100% 0%, color-mix(in srgb, var(--sky) 28%, transparent), transparent),
+    linear-gradient(180deg, color-mix(in srgb, var(--blush) 55%, transparent), transparent);
+}
+
+.hero {
+  padding-block: clamp(3rem, 8vw, 6rem);
+}
+
+.page-hero {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+/* Footer */
+.footer {
+  padding-top: 3rem;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.footer__links a {
+  text-underline-offset: 0.25em;
+}
+
+.footer__links a:not(:hover) {
+  text-decoration: none;
+}
+
+.footer__legal {
+  margin-top: 2rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+}

@@ -1,0 +1,64 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/book"
+  to = "/.netlify/functions/book"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/subscribe"
+  to = "/.netlify/functions/subscribe"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/episodes/:id/view"
+  to = "/.netlify/functions/episode-view?id=:id"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/episodes"
+  to = "/.netlify/functions/episodes"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api-not-found"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/nyanchiew-studio"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://*.supabase.co https://*.supabase.in"
